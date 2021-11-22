@@ -2,6 +2,7 @@ var cityInputEL = document.querySelector("#city-input");
 var citySearchEl = document.querySelector("#city-search");
 var savedCitiesEl = document.querySelector("#saved-cities");
 var clearSaveEl = document.querySelector("#clear-btn");
+var savedCityButton = document.querySelector("#city-btn");
 
 var savedCitiesArr = [];
 
@@ -43,6 +44,7 @@ var createSavedSearch = function (city) {
     var savedCityBtn = document.createElement("button");
     savedCityBtn.classList = "btn btn-lg btn-secondary col-12 text-light rounded my-1"
     savedCityBtn.textContent = city;
+    savedCityBtn.id = "city-btn";
 
     savedCitiesEl.appendChild(savedCityBtn);
 };
@@ -64,6 +66,7 @@ var showSavedCities = function () {
         var savedCityBtn = document.createElement("button");
         savedCityBtn.classList = "btn btn-lg btn-secondary col-12 text-light rounded my-1"
         savedCityBtn.textContent = savedCitiesArr[i];
+        savedCityBtn.id = "city-btn";
 
         savedCitiesEl.appendChild(savedCityBtn);
     };
@@ -74,9 +77,15 @@ var clearLocal = function() {
     savedCitiesEl.remove("button");
 };
 
+var cityBtn = function() {
+    var city = event.target.textContent.trim();
+    getCoordinates(city);
+}
+
 citySearchEl.addEventListener('submit', inputSubmitHandler)
 clearSaveEl.addEventListener('click', clearLocal)
-showSavedCities()
+savedCitiesEl.addEventListener('click', cityBtn);
+showSavedCities();
 
 
 
