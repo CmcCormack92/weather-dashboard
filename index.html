@@ -15,14 +15,14 @@
 
     <main>
         <div class="row">
-            <div id="city-search" class="col-lg-3 col-sm-12 p-3 m-3">
-                <div class="border-bottom border-secondary border-2 p-2">
+            <div class="col-lg-3 col-md-3 col-sm-12 p-3 m-3">
+                <form id="city-search" class="border-bottom border-secondary border-2 p-2">
                     <h2 class="fs-2 fw-bold col-12 m-2">Search for a city:</h2>
-                    <input type="text" class=" col-12 border border-2 rounded p-3 my-2 " placeholder="Tampa">
+                    <input id="city-input" type="text" class=" col-12 border border-2 rounded p-3 my-2" autofocus="true" placeholder="Tampa">
                     <button type="submit" class="btn btn-lg btn-info col-12 text-light rounded my-2">Search</button>
-                </div>
+                </form>
 
-                <div id="saved-cities" class="col-12 p-2">
+                <div id="saved-cities" class="col-12 d-none d-md-block d-lg-block p-2">
                     <button class="btn btn-lg btn-secondary col-12 text-light rounded my-2">Tampa</button>
                 </div>
 
