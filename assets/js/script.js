@@ -13,6 +13,7 @@ var cityHeaderText = "";
 var uvContainer = document.querySelector("#uv-container")
 var currentIcon = document.querySelector("#current-icon");
 var today = moment().format("MM/DD/YY");
+var forcastContainer = document.querySelector("#daily-forcast");
 
 var savedCitiesArr = [];
 
@@ -24,7 +25,7 @@ var inputSubmitHandler = function () {
     var city = cityInputEL.value.trim();
 
     cityHeaderText = city;
-    
+
     if (city) {
         getCoordinates(city);
         createSavedSearch(city);
@@ -46,7 +47,7 @@ var getCoordinates = function (city) {
                 var longitude = data.geonames[0].lng;
                 var lattitude = data.geonames[0].lat;
 
-                getWeather(longitude,lattitude,city);
+                getWeather(longitude, lattitude, city);
 
                 // console.log(data)
                 // console.log(longitude);
@@ -88,38 +89,39 @@ var showSavedCities = function () {
     };
 };
 
-var clearLocal = function() {
+var clearLocal = function () {
     localStorage.clear();
     savedCitiesEl.remove("button");
 };
 
-var cityBtn = function() {
+var cityBtn = function () {
     var city = event.target.textContent.trim();
     cityHeaderText = city;
     getCoordinates(city);
 }
 
-var getWeather = function(lattitude, longitude) {
+var getWeather = function (lattitude, longitude) {
     var weatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + longitude + "&lon=" + lattitude + "&units=imperial&appid=b4244de90737a4373c50c23818932a79"
 
     fetch(weatherUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-              currentWeather(data);
-            //   console.log(data)
+                currentWeather(data);
+                fiveDay(data);
+                console.log(data)
             })
         }
     })
 }
 
-var currentWeather = function(data) {
+var currentWeather = function (data) {
     var currentTemp = data.current.temp;
     var currentWind = data.current.wind_speed;
     var currentHumidity = data.current.humidity;
     var currentUv = data.current.uvi;
     var icon = data.current.weather[0].icon;
-  
-    currWeather.classList = "col-lg-8 col-sm-12 border border-2 border-dark"
+
+    currWeather.classList = "col-12 border border-2 border-dark my-3"
     currTemp.textContent = "Temp: " + currentTemp + " °F";
     currWind.textContent = "Wind: " + currentWind + " MPH";
     currHumidity.textContent = "Humidity: " + currentHumidity + "%";
@@ -137,6 +139,46 @@ var currentWeather = function(data) {
         uvContainer.classList.add("bg-danger");
     }
 }
+
+var fiveDay = function (data) {
+    while (forcastContainer.firstChild) {
+        var div = document.querySelector("#day-weather");
+        forcastContainer.removeChild(div);
+    };
+
+    var fiveDayHeader = document.querySelector("#five-day-header");
+    fiveDayHeader.textContent = "5-Day Forecast:"
+  
+
+    for (var i = 0; i < 5; i++) {
+        var forcastTemp = data.daily[i].temp.day;
+        var forcastWind = data.daily[i].wind_speed;
+        var forcastHumidity = data.daily[i].humidity;
+        var forcastIcon = data.daily[i].weather[0].icon;
+        var dayContainer = document.createElement("div");
+        dayContainer.id = "day-weather"
+
+        forcastContainer.appendChild(dayContainer);
+
+        dayContainer.classList = "text-white bg-primary col-2 py-2 px-3 mx-3"
+
+        var dailyIcon = document.createElement("img");
+        dailyIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + forcastIcon + ".png");
+        dayContainer.appendChild(dailyIcon);
+
+        var dailyTemp = document.createElement("h6");
+        dailyTemp.textContent = "Temp: " + forcastTemp + " °F";
+        dayContainer.appendChild(dailyTemp);
+
+        var dailyWind = document.createElement("h6");
+        dailyWind.textContent = "Wind: " + forcastWind + " MPH";
+        dayContainer.appendChild(dailyWind);
+
+        var dailyHumidity = document.createElement("h6");
+        dailyHumidity.textContent = "Humidity: " + forcastHumidity + "%"
+        dayContainer.appendChild(dailyHumidity);
+    }
+};
 
 citySearchEl.addEventListener('submit', inputSubmitHandler)
 clearSaveEl.addEventListener('click', clearLocal)

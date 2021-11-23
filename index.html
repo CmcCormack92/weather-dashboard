@@ -12,7 +12,7 @@
 
 <body>
 
-    <header class="bg-primary">
+    <header class="bg-primary row">
         <h1 class="text-center text-white fw-bolder p-3">Weather Dashboard</h1>
     </header>
 
@@ -34,26 +34,33 @@
                 </div>
             </div>
 
-            <div id="current-weather">
-                <div class="d-flex">
-                    <h2 id="city-header" class="fw-bold pt-2 pb-5"></h2>
-                    <div class="img-container">
-                        <img id="current-icon" class="">
-                    </div>
-
-                </div>
-
-                <div id="current-weather-items">
-                    <h4 id="current-temp" class="py-2 fw-light"></h4>
-                    <h4 id="current-wind" class="py-2 fw-light"></h4>
-                    <h4 id="current-humidity" class="py-2 fw-light"></h4>
+            <div class="col-lg-8 col-sm-12">
+                <div class="row">
+                <div id="current-weather">
                     <div class="d-flex">
-                        <h4 id="current-uvi" class="py-2 fw-light"></h4>
-                        <span id="uv-container"></span>
+                        <h2 id="city-header" class="fw-bold pt-2 pb-5"></h2>
+                        <div class="img-container">
+                            <img id="current-icon" class="">
+                        </div>
+
                     </div>
+
+                    <div id="current-weather-items">
+                        <h4 id="current-temp" class="py-2 fw-light"></h4>
+                        <h4 id="current-wind" class="py-2 fw-light"></h4>
+                        <h4 id="current-humidity" class="py-2 fw-light"></h4>
+                        <div class="d-flex">
+                            <h4 id="current-uvi" class="py-2 fw-light"></h4>
+                            <span id="uv-container"></span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <h3 id="five-day-header"></h3>
+                <div id="five-day">
+                    <div id="daily-forcast" class="row"></div>
                 </div>
             </div>
-            <div class="col-lg-8 col-sm-12" id="five-day"></div>
         </div>
     </main>
 
