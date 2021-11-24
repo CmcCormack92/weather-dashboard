@@ -39,7 +39,7 @@ var inputSubmitHandler = function () {
 }
 
 var getCoordinates = function (city) {
-    var geoUrl = "http://api.geonames.org/searchJSON?q=" + city + "&username=cmccormack92";
+    var geoUrl = "https://api.geonames.org/searchJSON?q=" + city + "&username=cmccormack92";
 
     fetch(geoUrl).then(function (response) {
         if (response.ok) {
