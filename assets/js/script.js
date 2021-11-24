@@ -39,13 +39,13 @@ var inputSubmitHandler = function () {
 }
 
 var getCoordinates = function (city) {
-    var geoUrl = "https://api.geonames.org/searchJSON?q=" + city + "&username=cmccormack92";
+    var geoUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b4244de90737a4373c50c23818932a79";
 
     fetch(geoUrl).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                var longitude = data.geonames[0].lng;
-                var lattitude = data.geonames[0].lat;
+                var longitude = data.coord.lon;
+                var lattitude = data.coord.lat;
 
                 getWeather(longitude, lattitude, city);
             })
