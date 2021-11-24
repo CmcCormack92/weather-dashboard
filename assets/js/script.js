@@ -141,7 +141,7 @@ var currentWeather = function (data) {
     currUvi.textContent = "Uv Index: ";
     uvContainer.textContent = currentUv;
     uvContainer.classList = "text-light fw-bold rounded d-flex justify-content-center align-items-center px-2 m-2";
-    cityHeader.textContent = cityHeaderText + "  " + today;
+    cityHeader.textContent = cityHeaderText + "  (" + today + ")";
     currentIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + icon + ".png");
 
     // changes uv index color based on conditions
