@@ -48,12 +48,13 @@ var getCoordinates = function (city) {
                 var lattitude = data.geonames[0].lat;
 
                 getWeather(longitude, lattitude, city);
-
-                // console.log(data)
-                // console.log(longitude);
-                // console.log(lattitude);
             })
+        } else {
+            alert("Error: " + response.statusText);
         }
+    })
+    .catch(function(error) {
+        alert("Unable to get coordinates!")
     })
 };
 
@@ -108,11 +109,15 @@ var getWeather = function (lattitude, longitude) {
             response.json().then(function (data) {
                 currentWeather(data);
                 fiveDay(data);
-                console.log(data)
             })
+        } else {
+            alert("Error: " + response.statusText);
         }
     })
-}
+    .catch(function(error){
+        alert("Unable to connect to Open Weather!")
+    });
+};
 
 var currentWeather = function (data) {
     var currentTemp = data.current.temp;
@@ -127,7 +132,7 @@ var currentWeather = function (data) {
     currHumidity.textContent = "Humidity: " + currentHumidity + "%";
     currUvi.textContent = "Uv Index: ";
     uvContainer.textContent = currentUv;
-    uvContainer.classList = "text-light rounded d-flex justify-content-center align-items-center px-2 m-2";
+    uvContainer.classList = "text-light fw-bold rounded d-flex justify-content-center align-items-center px-2 m-2";
     cityHeader.textContent = cityHeaderText + "  " + today;
     currentIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + icon + ".png");
 
@@ -150,17 +155,25 @@ var fiveDay = function (data) {
     fiveDayHeader.textContent = "5-Day Forecast:"
   
 
-    for (var i = 0; i < 5; i++) {
+    for (var i = 1; i < 6; i++) {
         var forcastTemp = data.daily[i].temp.day;
         var forcastWind = data.daily[i].wind_speed;
         var forcastHumidity = data.daily[i].humidity;
         var forcastIcon = data.daily[i].weather[0].icon;
+        var forecastDate = data.daily[i].dt;
         var dayContainer = document.createElement("div");
         dayContainer.id = "day-weather"
 
         forcastContainer.appendChild(dayContainer);
 
+        var daysDate = moment.unix(forecastDate).format("MM/DD/YY");
+
         dayContainer.classList = "text-white bg-primary col-2 py-2 px-3 mx-3"
+
+        var dateHeader = document.createElement("h5");
+        dateHeader.classList = "fw-bold";
+        dateHeader.textContent = daysDate;
+        dayContainer.appendChild(dateHeader);
 
         var dailyIcon = document.createElement("img");
         dailyIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + forcastIcon + ".png");
