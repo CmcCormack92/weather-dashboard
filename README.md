@@ -26,4 +26,4 @@ Christopher McCormack
 
 ## Screenshot
 
-<img width="1440" alt="Screen Shot 2021-11-23 at 9 30 50 PM" src="https://user-images.githubusercontent.com/86354138/143160829-ab21772a-5fba-4138-9dac-de89f9222513.png">
+<img width="1440" alt="Screen Shot 2021-11-24 at 5 14 25 PM" src="https://user-images.githubusercontent.com/86354138/143319493-447ead42-524b-4acd-935e-511ae3e3f053.png">
