@@ -17,51 +17,51 @@
     </header>
 
     <main>
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-12 p-3 m-3">
-                <form id="city-search" class="border-bottom border-secondary border-2 p-2">
-                    <h2 class="fs-2 fw-bold col-12 m-2">Search for a city:</h2>
-                    <input id="city-input" type="text" class=" col-12 border border-2 rounded p-3 my-2" autofocus="true"
-                        placeholder="Tampa">
-                    <button type="submit" class="btn btn-lg btn-info col-12 text-light rounded my-2">Search</button>
-                </form>
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-3 col-md-3 col-sm-10 p-3 m-3">
+                    <form id="city-search" class="border-bottom border-secondary border-2 p-2">
+                        <h2 class="fs-2 fw-bold col-12 m-2">Search for a city:</h2>
+                        <input id="city-input" type="text" class=" col-12 border border-2 rounded p-3 my-2"
+                            autofocus="true" placeholder="Tampa">
+                        <button type="submit" class="btn btn-lg btn-info col-12 text-light rounded my-2">Search</button>
+                    </form>
 
-                <div id="saved-cities" class="col-12 d-none d-md-block d-lg-block p-2"></div>
+                    <div id="saved-cities" class="col-12 d-none d-md-block d-lg-block p-2"></div>
 
-                <div id="clear-saved" class="col-12 d-none d-md-block d-lg-block p-2">
-                    <button id="clear-btn" class="btn btn-lg btn-danger col-12 text-light rounded my-1">Clear
-                        Saved</button>
-                </div>
-            </div>
-
-            <div class="col-lg-8 col-sm-12">
-                <div class="row">
-                <div id="current-weather">
-                    <div class="d-flex">
-                        <h2 id="city-header" class="fw-bold pt-2 pb-5"></h2>
-                        <div class="img-container">
-                            <img id="current-icon" class="">
-                        </div>
-
-                    </div>
-
-                    <div id="current-weather-items">
-                        <h4 id="current-temp" class="py-2 fw-light"></h4>
-                        <h4 id="current-wind" class="py-2 fw-light"></h4>
-                        <h4 id="current-humidity" class="py-2 fw-light"></h4>
-                        <div class="d-flex">
-                            <h4 id="current-uvi" class="py-2 fw-light"></h4>
-                            <span id="uv-container"></span>
-                        </div>
+                    <div id="clear-saved" class="col-12 d-none d-md-block d-lg-block p-2">
+                        <button id="clear-btn" class="btn btn-lg btn-danger col-12 text-light rounded my-1">Clear
+                            Saved</button>
                     </div>
                 </div>
-                </div>
-                <h3 id="five-day-header"></h3>
-                <div id="five-day">
-                    <div id="daily-forcast" class="row"></div>
+                
+                <div class="col-8">
+                    <div>
+                        <div id="current-weather">
+                            <div class="d-flex mx-3">
+                                <h2 id="city-header" class="fw-bold pt-2 pb-5"></h2>
+                                <div class="img-container">
+                                    <img id="current-icon" class="">
+                                </div>
+
+                            </div>
+
+                            <div id="current-weather-items" class="mx-3">
+                                <h4 id="current-temp" class="py-2 fw-light"></h4>
+                                <h4 id="current-wind" class="py-2 fw-light"></h4>
+                                <h4 id="current-humidity" class="py-2 fw-light"></h4>
+                                <div class="d-flex">
+                                    <h4 id="current-uvi" class="py-2 fw-light"></h4>
+                                    <span id="uv-container"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 id="five-day-header"></h3>
+                    <div id="five-day" class="">
+                        <div id="daily-forcast" class="row d-flex justify-content-between"></div>
+                    </div>
                 </div>
             </div>
-        </div>
     </main>
 
 

@@ -126,7 +126,7 @@ var currentWeather = function (data) {
     var currentUv = data.current.uvi;
     var icon = data.current.weather[0].icon;
 
-    currWeather.classList = "col-12 border border-2 border-dark my-3"
+    currWeather.classList = "col-12  border border-2 border-dark my-3 justify-content-center"
     currTemp.textContent = "Temp: " + currentTemp + " °F";
     currWind.textContent = "Wind: " + currentWind + " MPH";
     currHumidity.textContent = "Humidity: " + currentHumidity + "%";
@@ -168,10 +168,10 @@ var fiveDay = function (data) {
 
         var daysDate = moment.unix(forecastDate).format("MM/DD/YY");
 
-        dayContainer.classList = "text-white bg-primary col-2 py-2 px-3 mx-3"
+        dayContainer.classList = "text-white bg-primary col-lg-2 col-md-2 col-sm-8 py-2 px-2 my-1 mx-1 flex-fill"
 
         var dateHeader = document.createElement("h5");
-        dateHeader.classList = "fw-bold";
+        dateHeader.classList = "fw-bold fs-md-6";
         dateHeader.textContent = daysDate;
         dayContainer.appendChild(dateHeader);
 
