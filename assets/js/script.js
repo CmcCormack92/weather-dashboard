@@ -18,7 +18,7 @@ var forcastContainer = document.querySelector("#daily-forcast");
 var savedCitiesArr = [];
 
 
-
+// handles the form input when city is entered
 var inputSubmitHandler = function () {
     event.preventDefault();
 
@@ -38,6 +38,7 @@ var inputSubmitHandler = function () {
     }
 }
 
+// gets the cities coordinates to use with one call api
 var getCoordinates = function (city) {
     var geoUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=b4244de90737a4373c50c23818932a79";
 
@@ -58,6 +59,7 @@ var getCoordinates = function (city) {
     })
 };
 
+// creates a button each time a city is searched for in the form input
 var createSavedSearch = function (city) {
     var savedCityBtn = document.createElement("button");
     savedCityBtn.classList = "btn btn-lg btn-secondary col-12 text-light rounded my-1"
@@ -67,6 +69,7 @@ var createSavedSearch = function (city) {
     savedCitiesEl.appendChild(savedCityBtn);
 };
 
+// gets the saved cities from local storage
 var getSavedCities = function () {
     var storage = JSON.parse(localStorage.getItem("saved-city"));
 
@@ -77,6 +80,7 @@ var getSavedCities = function () {
     }
 };
 
+// appends the cities saved in local storage to the browser
 var showSavedCities = function () {
     getSavedCities();
 
@@ -90,17 +94,20 @@ var showSavedCities = function () {
     };
 };
 
+// clears local storage and removes the saved city buttons from the page
 var clearLocal = function () {
     localStorage.clear();
     savedCitiesEl.remove("button");
 };
 
+// adds function to the saved city buttons so they can be used as a quick search
 var cityBtn = function () {
     var city = event.target.textContent.trim();
     cityHeaderText = city;
     getCoordinates(city);
 }
 
+// gets weather for the requested city from open weather one call api
 var getWeather = function (lattitude, longitude) {
     var weatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + longitude + "&lon=" + lattitude + "&units=imperial&appid=b4244de90737a4373c50c23818932a79"
 
@@ -119,6 +126,7 @@ var getWeather = function (lattitude, longitude) {
     });
 };
 
+//gets the current weather conditions and displays them to the page
 var currentWeather = function (data) {
     var currentTemp = data.current.temp;
     var currentWind = data.current.wind_speed;
@@ -136,6 +144,7 @@ var currentWeather = function (data) {
     cityHeader.textContent = cityHeaderText + "  " + today;
     currentIcon.setAttribute("src", "http://openweathermap.org/img/wn/" + icon + ".png");
 
+    // changes uv index color based on conditions
     if (currentUv < 3) {
         uvContainer.classList.add("bg-success");
     } else if (currentUv >= 3 && currentUv < 6) {
@@ -145,6 +154,7 @@ var currentWeather = function (data) {
     }
 }
 
+//gets the weather conditions for the next 5 days and displays them to the page
 var fiveDay = function (data) {
     while (forcastContainer.firstChild) {
         var div = document.querySelector("#day-weather");

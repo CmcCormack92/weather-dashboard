@@ -11,13 +11,14 @@
 </head>
 
 <body>
-
+<!--Header Section-->
     <header class="bg-primary row">
         <h1 class="text-center text-white fw-bolder p-3">Weather Dashboard</h1>
     </header>
-
+<!--End Header-->
     <main>
             <div class="row d-flex justify-content-center">
+                <!--City Input form and saved cities buttons-->
                 <div class="col-lg-3 col-md-3 col-sm-10 p-3 m-3">
                     <form id="city-search" class="border-bottom border-secondary border-2 p-2">
                         <h2 class="fs-2 fw-bold col-12 m-2">Search for a city:</h2>
@@ -36,15 +37,18 @@
                 
                 <div class="col-8">
                     <div>
+                        <!--current weather section-->
                         <div id="current-weather">
                             <div class="d-flex mx-3">
+                                <!--Current weather header-->
                                 <h2 id="city-header" class="fw-bold pt-2 pb-5"></h2>
+                                <!--Current weather icon-->
                                 <div class="img-container">
                                     <img id="current-icon" class="">
                                 </div>
 
                             </div>
-
+                            <!--Current weather section content-->
                             <div id="current-weather-items" class="mx-3">
                                 <h4 id="current-temp" class="py-2 fw-light"></h4>
                                 <h4 id="current-wind" class="py-2 fw-light"></h4>
@@ -56,7 +60,9 @@
                             </div>
                         </div>
                     </div>
+                    <!--5-day forcast header-->
                     <h3 id="five-day-header"></h3>
+                    <!--5-day forecast content-->
                     <div id="five-day" class="">
                         <div id="daily-forcast" class="row d-flex justify-content-between"></div>
                     </div>
