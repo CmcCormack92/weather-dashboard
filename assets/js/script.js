@@ -15,26 +15,23 @@ var currentIcon = document.querySelector("#current-icon");
 var today = moment().format("MM/DD/YY");
 var forcastContainer = document.querySelector("#daily-forcast");
 
-var savedCitiesArr = [];
-
-
 // handles the form input when city is entered
-var inputSubmitHandler = function () {
+var inputSubmitHandler = function (event) {
     event.preventDefault();
 
     var city = cityInputEL.value.trim();
 
     cityHeaderText = city;
 
-    if (city) {
-        getCoordinates(city);
-        createSavedSearch(city);
+    if (city === "") {
 
-        cityInputEL.value = "";
-        savedCitiesArr.push(city);
-        localStorage.setItem("saved-city", JSON.stringify(savedCitiesArr));
-    } else {
         alert("Please Enter a City Name")
+        return
+    } else {
+        getCoordinates(city);
+        // createSavedSearch(city);
+        getSavedCities(city)
+        cityInputEL.value = "";
     }
 }
 
@@ -54,54 +51,54 @@ var getCoordinates = function (city) {
             alert("Error: " + response.statusText);
         }
     })
-    .catch(function(error) {
-        alert("Unable to get coordinates!")
-    })
-};
-
-// creates a button each time a city is searched for in the form input
-var createSavedSearch = function (city) {
-    var savedCityBtn = document.createElement("button");
-    savedCityBtn.classList = "btn btn-lg btn-secondary col-12 text-light rounded my-1"
-    savedCityBtn.textContent = city;
-    savedCityBtn.id = "city-btn";
-
-    savedCitiesEl.appendChild(savedCityBtn);
+        .catch(function (error) {
+            alert("Unable to get coordinates!")
+        })
 };
 
 // gets the saved cities from local storage
-var getSavedCities = function () {
+var getSavedCities = function (city) {
     var storage = JSON.parse(localStorage.getItem("saved-city"));
 
     if (storage === null) {
         storage = [];
-    } else {
-        savedCitiesArr = storage;
     }
+    storage.push(city)
+    localStorage.setItem('saved-city', JSON.stringify(storage))
+    showSavedCities()
 };
 
 // appends the cities saved in local storage to the browser
 var showSavedCities = function () {
-    getSavedCities();
+    // getSavedCities();
+    savedCitiesEl.textContent = ''
+    var storage = JSON.parse(localStorage.getItem("saved-city"));
 
-    for (var i = 0; i < savedCitiesArr.length; i++) {
-        var savedCityBtn = document.createElement("button");
-        savedCityBtn.classList = "btn btn-lg btn-secondary col-12 text-light rounded my-1"
-        savedCityBtn.textContent = savedCitiesArr[i];
-        savedCityBtn.id = "city-btn";
+    if (storage === null) {
+        savedCitiesEl.textContent = 'No History'
+    } else {
+        savedCitiesEl.textContent = ''
+        for (var i = 0; i < storage.length; i++) {
+            var savedCityBtn = document.createElement("button");
+            savedCityBtn.classList = "btn btn-lg btn-secondary col-12 text-light rounded my-1"
+            savedCityBtn.textContent = storage[i];
+            savedCityBtn.id = "city-btn";
+    
+            savedCitiesEl.appendChild(savedCityBtn);
+        };
+    }
 
-        savedCitiesEl.appendChild(savedCityBtn);
-    };
 };
 
 // clears local storage and removes the saved city buttons from the page
-var clearLocal = function () {
+var clearLocal = function (e) {
+    e.preventDefault()
     localStorage.clear();
-    savedCitiesEl.remove("button");
+    showSavedCities()
 };
 
 // adds function to the saved city buttons so they can be used as a quick search
-var cityBtn = function () {
+var cityBtn = function (event) {
     var city = event.target.textContent.trim();
     cityHeaderText = city;
     getCoordinates(city);
@@ -121,9 +118,9 @@ var getWeather = function (lattitude, longitude) {
             alert("Error: " + response.statusText);
         }
     })
-    .catch(function(error){
-        alert("Unable to connect to Open Weather!")
-    });
+        .catch(function (error) {
+            alert("Unable to connect to Open Weather!")
+        });
 };
 
 //gets the current weather conditions and displays them to the page
@@ -163,7 +160,7 @@ var fiveDay = function (data) {
 
     var fiveDayHeader = document.querySelector("#five-day-header");
     fiveDayHeader.textContent = "5-Day Forecast:"
-  
+
 
     for (var i = 1; i < 6; i++) {
         var forcastTemp = data.daily[i].temp.day;
