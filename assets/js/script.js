@@ -75,7 +75,7 @@ var showSavedCities = function () {
     var storage = JSON.parse(localStorage.getItem("saved-city"));
 
     if (storage === null) {
-        savedCitiesEl.textContent = 'No History'
+        savedCitiesEl.textContent = 'No Search History'
     } else {
         savedCitiesEl.textContent = ''
         for (var i = 0; i < storage.length; i++) {
